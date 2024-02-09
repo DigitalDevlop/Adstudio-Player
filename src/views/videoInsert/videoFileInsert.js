@@ -18,10 +18,10 @@ import { cilWarning, cilChevronCircleDownAlt } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import AWS from 'aws-sdk';
 
-const S3_BUCKET = 'adstudioplayer';
-const REGION = 'us-east-1';
-const ACCESS_KEY = 'AKIAX5AC2O5RRSJ5NL47'; // Replace with your actual access key
-const SECRET_ACCESS_KEY = 'QIMdyqp2nIYSnJ1v4ZC3v+YTuepGHDwbOYR02koE'; // Replace with your actual secret access key
+const S3_BUCKET = process.env.REACT_APP_S3_BUCKET;
+const REGION = process.env.REACT_APP_REGION;
+const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
+const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
 
 const s3 = new AWS.S3({
   accessKeyId: ACCESS_KEY,
