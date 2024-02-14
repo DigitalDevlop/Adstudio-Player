@@ -1,3 +1,4 @@
+// Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -16,21 +17,25 @@ import {
 import CIcon from '@coreui/icons-react';
 import { cilLockLocked, cilUser } from '@coreui/icons';
 import Img from '../../../assets/New Assets/Create A Video for.gif';
+import { loginUser } from './service/service.login'; // Import the loginUser function
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Check if the entered credentials match the predefined values
-    if (username === 'admin@adstudio.cloud' && password === 'admin123') {
-      sessionStorage.setItem('key', '110');
-      // Redirect to the desired page after successful login
-      // You can replace '/dashboard' with the actual route you want to redirect to
+  const handleLogin = async () => {
+    try {
+      const data = await loginUser(username, password);
+
+      // Set data to local storage
+      sessionStorage.setItem('userData', JSON.stringify(data));
+
+      // Navigate to dashboard
       navigate('/dashboard');
-    } else {
-      // Display an error message or take appropriate action for invalid credentials
+    } catch (error) {
+      console.error('Error during login:', error);
+      // Handle any errors that occur during the login process
       alert('Invalid username or password');
     }
   };

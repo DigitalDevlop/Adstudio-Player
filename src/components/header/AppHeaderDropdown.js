@@ -23,7 +23,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { useNavigate } from 'react-router-dom';
 
-import avatar8 from './../../assets/images/avatars/8.jpg'
+import avatar8 from './../../assets/images/avatars/upload.png'
 
 const AppHeaderDropdown = () => {
 
@@ -31,6 +31,8 @@ const AppHeaderDropdown = () => {
 
   const handleLogout = () => {
     sessionStorage.clear();
+    localStorage.clear();
+
     // Redirect to the login page or any other desired page
     navigate('/login');
   };

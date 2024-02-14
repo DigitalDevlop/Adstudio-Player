@@ -4,21 +4,18 @@ import { useNavigate } from 'react-router-dom';
 
 const DefaultLayout = () => {
   const navigate = useNavigate();
-  const [auth, setAuth] = useState(sessionStorage.getItem('key'));
+  const userData = JSON.parse(sessionStorage.getItem('userData'));
+  
   useEffect(() => {
-    // Check if the key 'key' with value '110' exists in sessionStorage
-    const keyValue = sessionStorage.getItem('key');
-
-    if (!keyValue || keyValue !== '110') {
-      setAuth(false)
-      // Redirect to the login page if the key is not found or doesn't have the expected value
+    if (!userData || !userData.jwt) {
+      // Navigate to the login page if userData or jwt is not available
       navigate('/login');
     }
-  }, [0]);
+  }, [userData, navigate]);
 
   return (
     <div>
-      {auth === '110' ? (
+      {userData ? (
         <>
           <AppSidebar />
           <div className="wrapper d-flex flex-column min-vh-100 bg-light">
@@ -29,7 +26,7 @@ const DefaultLayout = () => {
             <AppFooter />
           </div>
         </>
-      ): ""}
+      ) : null}
     </div>
   );
 };
